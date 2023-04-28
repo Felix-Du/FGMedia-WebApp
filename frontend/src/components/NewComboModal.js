@@ -16,10 +16,10 @@ class NewComboModal extends Component {
   render() {
     const create = this.props.create;
 
-    var title = "Editing Combo";
+    var title = "Edit Combo";
     var button = <Button onClick={this.toggle}>Edit</Button>;
     if (create) {
-      title = "Creating New Combo";
+      title = "Add Combo to List";
 
       button = (
         <Button
@@ -36,14 +36,14 @@ class NewComboModal extends Component {
     return (
       <Fragment>
         {button}
-        <Modal isOpen={this.state.modal} toggle={this.toggle}>
+        <Modal isOpen={this.state.modal} toggle={this.toggle} size="xl">
           <ModalHeader toggle={this.toggle}>{title}</ModalHeader>
-
           <ModalBody>
             <NewComboForm
               resetState={this.props.resetState}
               toggle={this.toggle}
               combo={this.props.combo}
+              create={this.props.create}
             />
           </ModalBody>
         </Modal>

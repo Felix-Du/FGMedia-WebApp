@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',
     'rest_framework',
+    'corsheaders',
     'fgcomboapp',
 ]
 
@@ -52,8 +52,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
-
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -129,7 +127,19 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+REST_FRAMEWORK = {
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+    ]
+}
+
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = ['*']
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+
+)
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/uploads/'

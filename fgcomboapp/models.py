@@ -9,7 +9,6 @@ class Combo(models.Model):
     comboNotation = models.TextField("Combo Notation")
     damage = models.PositiveBigIntegerField(
         "Damage",
-        default=0,
     )
     meterCost = models.PositiveBigIntegerField(
         "Meter Cost",
@@ -25,7 +24,7 @@ class Combo(models.Model):
     meterGain = models.PositiveBigIntegerField(
         "Meter Gain",
         default=0,
-        validators=[MinValueValidator(0), MaxValueValidator(400)]
+        validators=[MinValueValidator(0), MaxValueValidator(4)]
     )
     ANYWHERE = "ANY"
     MIDSCREEN = "MID"

@@ -46,10 +46,15 @@ class ComboList extends Component {
                                                 ''}
                                 </td>
                                 <td>{combo.notes}</td>
-                                <td><video width='400' controls>
-                                    <source src={combo.videoFile} type='video/mp4' />
-                                    Your browser does not support the video tag.
-                                </video></td>
+                                <td>
+                                    {combo.videoFile != null ?
+                                        <video width='400' controls>
+                                            <source src={combo.videoFile} type='video/mp4' />
+                                            Your browser does not support the video tag.
+                                        </video> :
+                                        <p>No video available.</p>
+                                    }
+                                </td>
                                 <td align="center">
                                     <NewComboModal
                                         create={false}

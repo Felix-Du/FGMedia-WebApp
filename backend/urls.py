@@ -30,8 +30,8 @@ router.register(r'combos', views.ComboView, 'combo')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    re_path(r'^api/combos/$', views.combos_list),
-    re_path(r'^api/combos/([0-9])$', views.combos_detail),
+    re_path(r'^api/combos/$', views.ComboView.combos_list),
+    re_path(r'^api/combos/([0-9])$', views.ComboView.combos_detail),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
