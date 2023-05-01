@@ -7,7 +7,6 @@ types of combos along with video demos.
 * Django REST Framework
 * ReactJS
 * JavaScript
-* Axios
 * Tailwind CSS
 
 ## How to Install
