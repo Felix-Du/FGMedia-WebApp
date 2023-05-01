@@ -5,15 +5,21 @@ types of combos along with video demos.
 ## Built Using
 * Django
 * Django REST Framework
-* ReactJS
+* React
 * JavaScript
 * Tailwind CSS
 
 ## How to Install
 ```pip install -r requirements.txt```
 
-## Database Configuration
-This project is currently using the default configuration with sqlite3. As the project continues to develop, the plan is to switch this to a MySQL server.
+#### Database Configuration
+* Default Configuration (SQLite3)
 
-### Run Development Server
+#### Run Development Server
 ```python manage.py runserver```
+
+## Roadmap
+- [ ] Implement Search and Filter to Combos
+- [ ] Add Authentication
+      - Let users report incorrect or inappropriate uploads
+- [ ] Change database configuration to use MySQL server
