@@ -25,11 +25,11 @@ class NewComboForm extends React.Component {
   state = {
     pk: 0,
     comboNotation: "",
-    damage: 0,
-    meterCost: 0,
-    moonSkillCost: 0,
+    damage: "",
+    meterCost: "",
+    moonSkillCost: "",
     moonDrive: false,
-    meterGain: 0,
+    meterGain: "",
     location: "",
     notes: "",
     videoFile: ""
@@ -76,8 +76,6 @@ class NewComboForm extends React.Component {
   }
 
   createCombo = e => {
-    console.log("UPLOADING COMBO")
-    console.log(this.state.comboNotation)
     e.preventDefault();
     var data;
     if (this.state.videoFile == "") {
@@ -125,18 +123,32 @@ class NewComboForm extends React.Component {
 
   editCombo = e => {
     e.preventDefault();
-    var data = [{
-      damage: parseInt(this.state.damage),
-      comboNotation: this.state.comboNotation,
-      meterCost: parseInt(this.state.meterCost),
-      moonSkillCost: parseInt(this.state.moonSkillCost),
-      moonDrive: this.state.moonDrive,
-      meterGain: parseInt(this.state.meterGain),
-      location: this.state.location.value,
-      notes: this.state.notes,
-      videoFile: this.state.videoFile,
-    }]
-    axios.put(API_URL + this.state.pk, data, {
+    var data;
+    if (this.state.videoFile == "") {
+      data = JSON.stringify({
+        damage: parseInt(this.state.damage),
+        comboNotation: this.state.comboNotation,
+        meterCost: parseInt(this.state.meterCost),
+        moonSkillCost: parseInt(this.state.moonSkillCost),
+        moonDrive: this.state.moonDrive,
+        meterGain: parseInt(this.state.meterGain),
+        location: this.state.location.value,
+        notes: this.state.notes,
+      });
+    } else {
+      data = JSON.stringify({
+        damage: parseInt(this.state.damage),
+        comboNotation: "asd",
+        meterCost: parseInt(this.state.meterCost),
+        moonSkillCost: parseInt(this.state.moonSkillCost),
+        moonDrive: this.state.moonDrive,
+        meterGain: parseInt(this.state.meterGain),
+        location: this.state.location.value,
+        notes: this.state.notes,
+        videoFile: this.state.videoFile,
+      });
+    }
+    axios.put(API_URL + this.state.pk + "/", data, {
       headers: {
         'Access-Control-Allow-Origin': true,
         'Content-Type': 'application/json'
@@ -160,6 +172,14 @@ class NewComboForm extends React.Component {
           <Row>
             <Col>
               <FormGroup>
+                <Label for="video">Video:</Label>
+                <FilePreviewer />
+              </FormGroup>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <FormGroup>
                 <Label for="comboNotation">Combo:</Label>
                 <textarea class="w-100 border-2 rounded form-control"
                   name="comboNotation"
@@ -173,22 +193,22 @@ class NewComboForm extends React.Component {
             <Col>
               <FormGroup>
                 <Label for="damage">Damage:</Label>
-                <Input name="damage" type="number" min="0" max="12300" onChange={this.onChange}
-                  value={this.defaultIfEmpty(this.state.damage)}></Input>
+                <Input required name="damage" type="number" min="0" max="12300" onChange={this.onChange}
+                  value={this.defaultIfEmpty(this.state.damage)} placeholder="0"></Input>
               </FormGroup>
             </Col>
             <Col>
               <FormGroup>
                 <Label for="meterCost">Meter Cost:</Label>
-                <Input name="meterCost" type="number" min="0" max="4" onChange={this.onChange}
-                  value={this.defaultIfEmpty(this.state.meterCost)}></Input>
+                <Input required name="meterCost" type="number" min="0" max="4" onChange={this.onChange}
+                  value={this.defaultIfEmpty(this.state.meterCost)} placeholder="0"></Input>
               </FormGroup>
             </Col>
             <Col>
               <FormGroup>
                 <Label for="meterGain">Meter Gain:</Label>
-                <Input name="meterGain" type="number" min="0" max="4" onChange={this.onChange}
-                  value={this.defaultIfEmpty(this.state.meterGain)}></Input>
+                <Input required name="meterGain" type="number" min="0" max="4" onChange={this.onChange}
+                  value={this.defaultIfEmpty(this.state.meterGain)} placeholder="0"></Input>
               </FormGroup>
             </Col>
           </Row>
@@ -196,8 +216,8 @@ class NewComboForm extends React.Component {
             <Col>
               <FormGroup>
                 <Label for="moonSkillCost">Moon Skill Cost:</Label>
-                <Input name="moonSkillCost" type="number" min="0" max="6" onChange={this.onChange}
-                  value={this.defaultIfEmpty(this.state.moonSkillCost)}></Input>
+                <Input required name="moonSkillCost" type="number" min="0" max="6" onChange={this.onChange}
+                  value={this.defaultIfEmpty(this.state.moonSkillCost)} placeholder="0"></Input>
               </FormGroup>
             </Col>
             <Col>
@@ -231,22 +251,16 @@ class NewComboForm extends React.Component {
             <Col>
               <FormGroup>
                 <Label for="notes">Notes:</Label>
-                <textarea
+                <textarea class="w-100 border-2 rounded form-control"
                   name="notes"
                   onChange={this.onChange}
                   value={this.defaultIfEmpty(this.state.notes)}
                 />
               </FormGroup>
             </Col>
-            <Col>
-              <FormGroup>
-                <Label for="video">Video:</Label>
-                <FilePreviewer />
-              </FormGroup>
-            </Col>
           </Row>
         </Container>
-        <Button onClick={this.props.create == true ? this.createCombo : this.editCombo}>{this.props.create == true ? 'Upload' : 'Update Combo'}</Button>
+        <Input type="submit" value={this.props.create == true ? 'Upload' : 'Update Combo'} onSubmit={this.props.create == true ? this.createCombo : this.editCombo} />
       </Form>
     );
   }

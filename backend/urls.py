@@ -30,8 +30,9 @@ router.register(r'combos', views.ComboView, 'combo')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    re_path(r'^api/combos/$', views.ComboView.combos_list),
-    re_path(r'^api/combos/([0-9])$', views.ComboView.combos_detail),
+    re_path(r'^api/game/$', views.GameView.game_list),
+    re_path(r'^api/game/([0-9])$', views.GameView.game_detail),
+    re_path(r'^api/combo/$', views.ComboView.combo_list),
+    re_path(r'^api/combo/([0-9])$', views.ComboView.combo_detail),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

@@ -4,26 +4,34 @@ from .formatChecker import ContentTypeRestrictedFileField
 
 # Create your models here.
 
+class Game(models.Model):
+    title = models.TextField("Game Title")
+    release_date = models.DateField("Release Date", null=True,default=None)
+    
+    # Make sure to define __str__ when creating one-to-many relationships
+    # admin will see object instead of a defined field
+    def __str__(self):
+        return self.title
 
+#
 class Combo(models.Model):
+
+    game = models.ForeignKey(Game, on_delete=models.CASCADE, null=True, default=None)
     comboNotation = models.TextField("Combo Notation")
     damage = models.PositiveBigIntegerField(
         "Damage",
     )
     meterCost = models.PositiveBigIntegerField(
         "Meter Cost",
-        default=0,
         validators=[MinValueValidator(0), MaxValueValidator(4)]
     )
     moonSkillCost = models.PositiveBigIntegerField(
         "Moon Skill Cost",
-        default=0,
         validators=[MinValueValidator(0), MaxValueValidator(6)]
     )
     moonDrive = models.BooleanField("Moon Drive")
     meterGain = models.PositiveBigIntegerField(
         "Meter Gain",
-        default=0,
         validators=[MinValueValidator(0), MaxValueValidator(4)]
     )
     ANYWHERE = "ANY"
@@ -52,5 +60,5 @@ class Combo(models.Model):
         null=True
     )
 
-    def _str_(self):
+    def __str__(self):
         return self.comboNotation

@@ -1,6 +1,13 @@
 from rest_framework import serializers
+from .models import Game
 from .models import Combo
 
+class gameSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Game
+        fields = ('gameTitle', 'release_date')
+        
 class ComboSerializer(serializers.ModelSerializer):
 
     class Meta:

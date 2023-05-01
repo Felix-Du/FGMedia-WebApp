@@ -17,10 +17,17 @@ class ConfirmRemovalModal extends Component {
   };
 
   deleteCombo = pk => {
-    axios.delete(API_URL + pk).then(() => {
-      this.props.resetState();
-      this.toggle();
-    });
+    axios.delete(API_URL + pk + "/", {
+      headers: {
+        'Access-Control-Allow-Origin': true,
+        'Content-Type': 'application/json'
+      },
+      mode: 'cors',
+    }).
+      then(() => {
+        this.props.resetState();
+        this.toggle();
+      });
   };
 
   render() {

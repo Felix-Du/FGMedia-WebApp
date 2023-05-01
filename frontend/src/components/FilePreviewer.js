@@ -1,9 +1,11 @@
 import { useState, useRef } from "react";
+
 export default function FilePreviewer() {
   const [videoPreview, setVideoPreview] = useState(null);
   const filePicekerRef = useRef(null);
 
-  function previewFile(e) {
+  const previewFile = e => {
+    e.preventDefault();
     // Reading New File (open file Picker Box)
     const reader = new FileReader();
     // Gettting Selected File (user can select multiple but we are choosing only one)
@@ -19,7 +21,8 @@ export default function FilePreviewer() {
     };
   }
 
-  function clearFile() {
+  const clearFile = e => {
+    e.preventDefault();
     setVideoPreview(null);
   }
   

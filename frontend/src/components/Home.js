@@ -26,7 +26,7 @@ class Home extends Component {
 
   render() {
     return (
-      <Container style={{ marginTop: "20px" }}>
+      <Container fluid style={{ marginTop: "20px" }}>
         <Row>
           <Col>
             <ComboList
